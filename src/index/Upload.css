@@ -1,0 +1,19 @@
+.header{
+  background: #eee;
+  height: 120px;
+  line-height: 120px;
+  font-size: 63px;
+  font-weight: 500;
+  color: #333;
+  text-align: center;
+  padding: 60px 0; 
+  margin-bottom: 20px;
+}
+.checkbox{
+  padding-top: 10px;
+  font-size: 10px;
+}
+.my-table{
+  margin: 0 auto 20px;
+  padding: 0 50px;
+}
