@@ -42,8 +42,10 @@ class UploadFile extends Component {
             align: "center"
           }
         ],
-        data: []
+        data: [],
+        
     }
+    this.backShow = this.backShow.bind(this);
   }
   render() {
     // 上传的文件
@@ -69,7 +71,7 @@ class UploadFile extends Component {
               <Upload
                 className="upload-demo"
                 ref="upload"
-                action="//jsonplaceholder.typicode.com/posts/"
+                action="ws://0.0.0.0:7777/sayHi"
                 onPreview={file => this.handlePreview(file)}
                 onRemove={(file, fileList) => this.handleRemove(file, fileList)}
                 fileList={fileList}
@@ -77,6 +79,7 @@ class UploadFile extends Component {
                 trigger={<Button size="small" type="primary">选取文件</Button>}
               >
                 <Button style={{ marginLeft: '10px'}} size="small" type="success" onClick={() => this.submitUpload()}>上传</Button>
+                <Button style={{ marginLeft: '10px'}} size="small" type="success" onClick={() => this.test()}>测试</Button>
               </Upload>
               <div className="checkbox">
                 <Checkbox checked={this.state.submitValid} onChange={(value) => this.handleCheck(value)}>我已阅读<a href=" about.html">《安权链用户安全协议》</a></Checkbox>
@@ -97,6 +100,10 @@ class UploadFile extends Component {
       </div>
     );
   }
+  componentWillMount(){
+  }
+  componentDidMount(){
+  }
   handleRemove(file, fileList) {
     console.log(file, fileList);
   }
@@ -104,10 +111,11 @@ class UploadFile extends Component {
   handlePreview(file) {
     console.log(file);
   }
-  
   submitUpload() {
     if(this.state.submitValid){
       // this.refs.upload.submit();
+      // 
+      console.log(window.ws)
       var res = {
         timestamp: '2016-05-02',
         creator: '张轩睿',
@@ -116,17 +124,23 @@ class UploadFile extends Component {
         filehash: 'ashahaisdyf7989q00hjvhcjkxlskaj',
         type: '保存'
       };
-      var temp = [];
-      for(let i=0;i<10;i++){
-        temp.push(res);
-      }
-      this.setState({
-        data: temp
-      })
+      window.ws('/sayHi',res,this.backShow);
+      
     }else{
       console.log("请您阅读并确认《安权链用户安全协议》")
     }
-    
+  }
+  backShow(res){
+    var self = this;
+    var temp = [];
+    console.log(JSON.parse(res.data))
+    for(let i=0;i<10;i++){
+      temp.push(JSON.parse(res.data));
+    }
+    console.log(temp)
+    self.setState({
+      data: temp
+    })
   }
   handleCheck(value) {
     console.log(value)

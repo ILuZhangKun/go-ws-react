@@ -7,6 +7,12 @@ class Hello extends Component {
       </div>
     );
   }
+  componentWillMount(){
+    console.log(window.websocket)
+    if(window.websocket.readyState === 1){
+      window.websocket.send("哈喽服务器")
+    }
+  }
 }
 
 export default Hello;

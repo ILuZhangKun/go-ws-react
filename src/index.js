@@ -2,9 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import Router from './Router';
-// import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'element-theme-default';
+//WebSocket封装方法
+import './api/websocket.js'
 ReactDOM.render(<Router />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
